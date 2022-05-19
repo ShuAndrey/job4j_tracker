@@ -7,8 +7,8 @@ public class College {
         student.setGroup("4-B");
         student.setDate("12 September");
         String ln = System.lineSeparator();
-        System.out.println("Name : " + student.getName() + ln +
-                "Group : " + student.getGroup() + ln +
-                "Date : " + student.getDate());
+        System.out.println("Name : " + student.getName() + ln
+                + "Group : " + student.getGroup() + ln
+                + "Date : " + student.getDate());
     }
 }
