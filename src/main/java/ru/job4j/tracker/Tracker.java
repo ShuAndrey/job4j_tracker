@@ -30,7 +30,7 @@ public class Tracker {
     public Item findById(int id) {
         int index = indexOf(id);
         Item result = null;
-        if (items.get(index).getId() == id) {
+        if (index != -1 && items.get(index).getId() == id) {
             result = items.get(index);
         }
 
@@ -39,22 +39,20 @@ public class Tracker {
 
     public boolean replace(int id, Item item) {
         int index = indexOf(id);
-        boolean result = false;
+        boolean result = index != -1;
         if (items.get(index).getId() == id) {
             items.remove(items.get(index));
             item.setId(id);
             items.add(item);
-            result = true;
         }
         return result;
     }
 
     public boolean delete(int id) {
         int index = indexOf(id);
-        boolean result = false;
-        if (items.get(index).getId() == id) {
+        boolean result = index != -1;
+        if (result && items.get(index).getId() == id) {
             items.remove(items.get(index));
-            result = true;
         }
         return result;
     }
