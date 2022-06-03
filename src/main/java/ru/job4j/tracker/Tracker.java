@@ -1,9 +1,6 @@
 package ru.job4j.tracker;
 
-import jdk.dynalink.linker.LinkerServices;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Tracker {
@@ -17,7 +14,7 @@ public class Tracker {
     }
 
     public List<Item> findAll() {
-        return items;
+        return List.copyOf(items);
     }
 
     public List<Item> findByName(String key) {
@@ -31,38 +28,45 @@ public class Tracker {
     }
 
     public Item findById(int id) {
+        int index = indexOf(id);
         Item result = null;
-        for (Item item : items) {
-            if (item.getId() == id) {
-                result = item;
-            }
+        if (items.get(index).getId() == id) {
+            result = items.get(index);
         }
+
         return result;
     }
 
     public boolean replace(int id, Item item) {
+        int index = indexOf(id);
         boolean result = false;
-        for (Item one : items) {
-            if (one.getId() == id) {
-                items.remove(one);
-                item.setId(id);
-                items.add(item);
-                result = true;
-                break;
-            }
+        if (items.get(index).getId() == id) {
+            items.remove(items.get(index));
+            item.setId(id);
+            items.add(item);
+            result = true;
         }
         return result;
     }
 
     public boolean delete(int id) {
+        int index = indexOf(id);
         boolean result = false;
-        for (Item item : items) {
-            if (item.getId() == id) {
-                items.remove(item);
-                result = true;
-                break;
-            }
+        if (items.get(index).getId() == id) {
+            items.remove(items.get(index));
+            result = true;
         }
         return result;
     }
+
+    private int indexOf(int id) {
+        int rsl = -1;
+        for (int index = 0; index < items.size(); index++) {
+            if (items.get(index).getId() == id) {
+                rsl = index;
+            }
+        }
+        return rsl;
+    }
+
 }
