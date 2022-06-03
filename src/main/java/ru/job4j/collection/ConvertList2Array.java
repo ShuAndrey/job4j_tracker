@@ -7,13 +7,13 @@ public class ConvertList2Array {
     public static int[][] toArray(List<Integer> list, int cells) {
         int groups = (int) Math.ceil((double) list.size() / cells);
         int[][] array = new int[groups][cells];
-        int index = 0;
-        for (int row = 0; row < groups; row++) {
-            for (int cell = 0; cell < cells; cell++) {
-                array[row][cell] = list.get(index++);
-                if (index == list.size()) {
-                    break;
-                }
+        int row = 0, cell = 0;
+        for (Integer num : list) {
+            array[row][cell] = num;
+            cell++;
+            if (cell == cells) {
+                cell = 0;
+                row++;
             }
         }
         return array;
