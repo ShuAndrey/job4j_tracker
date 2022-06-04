@@ -10,8 +10,8 @@ public class UniqueText {
         String[] text = duplicateText.split(" ");
         HashSet<String> check = new HashSet<>(Arrays.asList(origin));
         for (String txt : text) {
-            rsl = check.contains(txt);
-            if (!rsl) {
+            if (!check.contains(txt)) {
+                rsl = false;
                 break;
             }
         }
