@@ -29,7 +29,7 @@ public class Tracker {
 
     public Item findById(int id) {
         int index = indexOf(id);
-        return indexOf(id) != -1 ? items.get(index) : null;
+        return index != -1 ? items.get(index) : null;
     }
 
     public boolean replace(int id, Item item) {
@@ -61,5 +61,4 @@ public class Tracker {
         }
         return rsl;
     }
-
 }
