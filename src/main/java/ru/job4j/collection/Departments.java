@@ -20,10 +20,8 @@ public class Departments {
         Set<String> tmp = new LinkedHashSet<>();
         for (String value : deps) {
             String start = "";
-            String temp = null;
             for (String el : value.split("/")) {
-                temp = temp == null ? el : temp;
-                start = Objects.equals(start, temp) ? start + "/" + el : temp;
+                start += "".equals(start) ? el : "/" + el;
                 tmp.add(start);
             }
         }

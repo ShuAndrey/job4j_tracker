@@ -20,19 +20,7 @@ public class DepDescComp implements Comparator<String> {
     public int compare(String o1, String o2) {
         String[] o1Array = o1.split("/");
         String[] o2Array = o2.split("/");
-        int length = Math.min(o1Array.length, o2Array.length);
         int rst = o2Array[0].compareTo(o1Array[0]);
-        if (rst == 0) {
-            for (int index = 1; index < length; index++) {
-                rst = o1Array[index].compareTo(o2Array[index]);
-                if (rst != 0) {
-                    break;
-                }
-            }
-        }
-        if (rst == 0 && o1Array.length != o2Array.length) {
-            rst = o1Array.length - o2Array.length;
-        }
-        return rst;
+        return rst != 0 ? rst : o1.compareTo(o2);
     }
 }
