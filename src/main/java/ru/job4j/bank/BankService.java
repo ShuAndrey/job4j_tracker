@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class BankService {
     /**
-     * Колекция хранит пользователей и привязанные к ним банковские счета.
+     * Коллекция хранит пользователей и привязанные к ним банковские счета.
      */
     private final Map<User, List<Account>> users = new HashMap<>();
 
@@ -46,14 +46,10 @@ public class BankService {
      * @return - Пользователь или null, если пользователь не найден.
      */
     public User findByPassport(String passport) {
-        User result = null;
-        for (User user : users.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                result = user;
-                break;
-            }
-        }
-        return result;
+        return users.keySet()
+                .stream()
+                .filter(p -> p.getPassport().equals(passport))
+                .findFirst().orElse(null);
     }
 
     /**
@@ -64,18 +60,13 @@ public class BankService {
      * @return - банковский счет или null, если счет не найден.
      */
     public Account findByRequisite(String passport, String requisite) {
-        Account account = null;
         User user = findByPassport(passport);
-        if (user != null) {
-            List<Account> list = users.get(user);
-            for (Account acc : list) {
-                if (acc.getRequisite().equals(requisite)) {
-                    account = acc;
-                    break;
-                }
-            }
-        }
-        return account;
+        return user != null
+                ? users.get(user)
+                .stream()
+                .filter(a -> a.getRequisite().equals(requisite))
+                .findFirst().orElse(null)
+                : null;
     }
 
     /**
