@@ -18,6 +18,8 @@ public class School {
      * @return - список тех, кто подходит по условию.
      */
     public List<Student> collect(List<Student> students, Predicate<Student> predict) {
-        return students.stream().filter(predict).collect(Collectors.toList());
+        return students.stream()
+                .filter(predict)
+                .collect(Collectors.toList());
     }
 }
