@@ -59,10 +59,10 @@ public class BankService {
      * @return - банковский счет или null, если счет не найден.
      */
     public Optional<Account> findByRequisite(String passport, String requisite) {
-        return findByPassport(passport).stream()
-                .flatMap(x -> users.get(x).stream())
+        return findByPassport(passport).flatMap(x -> users.get(x)
+                .stream()
                 .filter(a -> a.getRequisite().equals(requisite))
-                .findFirst();
+                .findFirst());
     }
 
     /**
