@@ -30,12 +30,11 @@ public class BankService {
      */
     public void addAccount(String passport, Account account) {
         Optional<User> user = findByPassport(passport);
-        List<Account> list = new ArrayList<>();
         if (user.isPresent()) {
-            list = users.get(user.get());
-        }
-        if (!list.contains(account)) {
-            list.add(account);
+            List<Account> list = users.get(user.get());
+            if (!list.contains(account)) {
+                list.add(account);
+            }
         }
     }
 
@@ -60,15 +59,10 @@ public class BankService {
      * @return - банковский счет или null, если счет не найден.
      */
     public Optional<Account> findByRequisite(String passport, String requisite) {
-        Optional<User> user = findByPassport(passport);
-        Optional<Account> account = Optional.empty();
-        if (user.isPresent()) {
-            account = users.get(user.get())
-                    .stream()
-                    .filter(a -> a.getRequisite().equals(requisite))
-                    .findFirst();
-        }
-        return account;
+        return findByPassport(passport).stream()
+                .flatMap(x -> users.get(x).stream())
+                .filter(a -> a.getRequisite().equals(requisite))
+                .findFirst();
     }
 
     /**
