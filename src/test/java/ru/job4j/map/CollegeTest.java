@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
 public class CollegeTest {
     @Test
@@ -97,6 +97,6 @@ public class CollegeTest {
                 )
         );
         College college = new College(students);
-        assertThat(college.findBySubjectName("000002", "Sociology").get().getScore(), is(65));
+        assertThat(college.findBySubjectName("000002", "Sociology").get().score(), is(65));
     }
 }

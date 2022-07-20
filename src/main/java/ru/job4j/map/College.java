@@ -9,12 +9,7 @@ import java.util.Set;
  *
  * @author Andrey Shulgin
  */
-public class College {
-    private final Map<Student, Set<Subject>> students;
-
-    public College(Map<Student, Set<Subject>> students) {
-        this.students = students;
-    }
+public record College(Map<Student, Set<Subject>> students) {
 
     /**
      * Метод поиска студента по аккаунту.
@@ -46,7 +41,7 @@ public class College {
         if (s.isPresent()) {
             Set<Subject> subjects = students.get(s.get());
             for (Subject subj : subjects) {
-                if (name.equals(subj.getName())) {
+                if (name.equals(subj.name())) {
                     rsl = Optional.of(subj);
                     break;
                 }
