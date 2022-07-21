@@ -105,12 +105,10 @@ public class AnalyzeByMap {
      */
     private static LinkedHashMap<String, Integer> mapOfSubjects(List<Pupil> pupils) {
         LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
-        int sumScore;
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
                 map.putIfAbsent(subject.name(), 0);
-                sumScore = map.get(subject.name()) + subject.score();
-                map.replace(subject.name(), sumScore);
+                map.computeIfPresent(subject.name(), (a, b) -> b + subject.score());
             }
         }
         return map;
